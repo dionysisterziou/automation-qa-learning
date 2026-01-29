@@ -1,3 +1,6 @@
+import pytest
+
+
 # Μάθημα 10 - Πολλά pytest tests (σωστή δομή)
 # def test_payment_success():
 #     status = "SUCCESS"
@@ -26,4 +29,5 @@
 
 # def test_payment_zero_amount_fails():
 #     payment = {"amount": 0, "status": "SUCCESS"}
-#     validate_payment(payment)
+#     with pytest.raises(AssertionError):
+#         validate_payment(payment)
