@@ -37,3 +37,9 @@ def test_get_posts_status_code_ok(post_id):
     response = requests.get(f"https://jsonplaceholder.typicode.com/posts/{post_id}")
 
     assert response.status_code == 200, "Status code should be 200"
+
+
+def test_get_post_invalid_id_returns_404():
+    response = requests.get("https://jsonplaceholder.typicode.com/posts/0")
+
+    assert response.status_code == 404, "Status code should be 404"
