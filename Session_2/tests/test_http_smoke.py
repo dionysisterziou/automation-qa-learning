@@ -1,4 +1,5 @@
 import requests
+import pytest
 from validations.posts import validate_post_1
 
 
@@ -13,3 +14,12 @@ def test_get_post_1_body_fields():
     data = response.json()
 
     validate_post_1(data)
+
+
+def test_get_post_1_wrong_expectation_should_fail():
+    response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+    data = response.json()
+    data["id"] = 999
+
+    with pytest.raises(AssertionError):
+        validate_post_1(data)
