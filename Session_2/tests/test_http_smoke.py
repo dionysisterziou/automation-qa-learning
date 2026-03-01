@@ -1,22 +1,23 @@
 import requests
 import pytest
 from validations.posts import validate_post_1
+from config import BASE_URL
 
 
 def test_get_post_1_status_code():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+    response = requests.get(f"{BASE_URL}/posts/1")
     assert response.status_code == 200, "Status code should be 200"
 
 
 def test_get_post_1_body_fields():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+    response = requests.get(f"{BASE_URL}/posts/1")
     data = response.json()
 
     validate_post_1(data)
 
 
 def test_get_post_1_wrong_expectation_should_fail():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+    response = requests.get(f"{BASE_URL}/posts/1")
     data = response.json()
     data["id"] = 999
 
@@ -33,31 +34,31 @@ def test_get_post_1_wrong_expectation_should_fail():
     ]
 )
 def test_get_posts_status_code_ok(post_id):
-    response = requests.get(f"https://jsonplaceholder.typicode.com/posts/{post_id}")
+    response = requests.get(f"{BASE_URL}/posts/{post_id}")
     assert response.status_code == 200, "Status code should be 200"
 
 
 def test_get_post_invalid_id_returns_404():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts/0")
+    response = requests.get(f"{BASE_URL}/posts/0")
     assert response.status_code == 404, "Status code should be 404"
 
 
 def test_get_post_invalid_endpoint_returns_404():
-    response = requests.get("https://jsonplaceholder.typicode.com/invalid_endpoint")
+    response = requests.get(f"{BASE_URL}/invalid_endpoint")
     assert response.status_code == 404, f"Unexpected status code: {response.status_code}"
 
 # Μάθημα 11: Timeouts
 def test_timeout_should_raise_exception():
     with pytest.raises(requests.exceptions.Timeout):
         requests.get(
-            "https://jsonplaceholder.typicode.com/posts/1",
+            f"{BASE_URL}/posts/1",
             timeout=0.0001
         )
 
 
 # Μάθημα 12: Invalid JSON (JSON decode error)
 def test_response_json_on_plain_text_should_fail():
-    response = requests.get("https://jsonplaceholder.typicode.com/", timeout=5)
+    response = requests.get(f"{BASE_URL}/", timeout=5)
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
 
     with pytest.raises(ValueError):
