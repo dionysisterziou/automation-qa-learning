@@ -47,13 +47,12 @@ def test_get_post_invalid_endpoint_returns_404():
     response = get("/invalid_endpoint")
     assert response.status_code == 404, f"Unexpected status code: {response.status_code}"
 
-# Μάθημα 11: Timeouts
+
 def test_timeout_should_raise_exception():
     with pytest.raises(requests.exceptions.Timeout):
         get("/posts/1", timeout=0.0001)
 
 
-# Μάθημα 12: Invalid JSON (JSON decode error)
 def test_response_json_on_plain_text_should_fail():
     response = requests.get("https://httpbin.org/html", timeout=5)
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
@@ -67,7 +66,6 @@ def test_https_ssl_failure_should_raise():
         requests.get("https://example.com", timeout=5)
 
 
-# Μάθημα 13: Redirects (301/302) με requests
 def test_redirect_302_has_location_header():
     response = requests.get("https://httpbin.org/redirect/1", allow_redirects=False, timeout=5)
 
@@ -75,7 +73,6 @@ def test_redirect_302_has_location_header():
     assert "Location" in response.headers, "Redirect response should include Location header"
 
 
-# Μάθημα 14: Redirect followed vs not followed (behaviour check)
 def test_redirect_is_followed_by_default():
     response = requests.get("https://httpbin.org/redirect/1", timeout=5)
 
