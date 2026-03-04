@@ -8,7 +8,7 @@ from validations.users_api import validate_user_by_id
         2
     ]
 )
-def test_get_user_by_id_fields(client_get, expected_id):
+def test_get_user_by_id_ok(client_get, expected_id):
     response = client_get(f"/users/{expected_id}") # timeout=5 μπαίνει default από http_client
     data = response.json()
 
