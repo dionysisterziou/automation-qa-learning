@@ -1,11 +1,8 @@
 import pytest
-from validations.post_comments_api import validate_comment
+from validations.comments_api import validate_comment_for_post
 
 
-@pytest.mark.parametrize(
-    "post_id",
-    [1, 2]
-)
+@pytest.mark.parametrize("post_id", [1, 2])
 def test_get_post_comments_ok(client_get, post_id):
     response = client_get(f"/posts/{post_id}/comments")
 
@@ -13,8 +10,8 @@ def test_get_post_comments_ok(client_get, post_id):
 
     data = response.json()
 
-    assert isinstance(data, list)
-    assert data
+    assert isinstance(data, list), "Response must be a list"
+    assert data, "Comments list must not be empty"
 
     for comment in data:
-        validate_comment(comment, post_id)
+        validate_comment_for_post(comment, post_id)

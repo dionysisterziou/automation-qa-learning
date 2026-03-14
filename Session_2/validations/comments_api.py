@@ -16,7 +16,8 @@ def validate_comment_structure(comment):
     assert isinstance(comment["body"], str), "body must be str"
 
     # meaningful value
-    assert comment["id"], "id must not be empty"
+    assert comment["postId"] > 0, "postId must be greater than 0"
+    assert comment["id"] > 0, "id must be greater than 0"
     assert comment["name"], "name must not be empty"
     assert comment["email"], "email must not be empty"
     assert comment["body"], "body must not be empty"
@@ -25,7 +26,7 @@ def validate_comment_structure(comment):
     assert "@" in comment["email"], "email must contain @"
 
 
-def validate_comment(comment, expected_post_id):
+def validate_comment_for_post(comment, expected_post_id):
     validate_comment_structure(comment)
     assert comment["postId"] == expected_post_id, (
         f"Expected postId {expected_post_id}, got {comment['postId']}"
