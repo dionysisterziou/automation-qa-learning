@@ -1,5 +1,5 @@
 import pytest
-from validations.users import validate_user
+from practice.users_practice import validate_user
 
 
 def test_user_ok():
