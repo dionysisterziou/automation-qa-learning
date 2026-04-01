@@ -6,3 +6,8 @@ from config import BASE_URL
 @pytest.fixture
 def api_client():
     return HttpClient(BASE_URL)
+
+
+@pytest.fixture
+def  client_get(api_client):
+    return api_client.get
