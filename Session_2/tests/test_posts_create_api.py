@@ -38,3 +38,24 @@ def test_create_post_missing_body_does_not_match_full_post_contract(api_client):
     assert data["title"] == payload["title"]
     assert data["userId"] == payload["userId"]
     assert "body" not in data
+
+
+def test_create_post_wrong_type_user_id_is_echoed_as_sent(api_client):
+    payload = {
+        "title": "my test title",
+        "body": "my test body",
+        "userId": "abc",
+    }
+
+    response = api_client.post("/posts", json=payload)
+
+    assert response.status_code == 201
+
+    data = parse_json(response)
+
+    assert isinstance(data, dict)
+    assert "id" in data
+    assert data["title"] == payload["title"]
+    assert data["body"] == payload["body"]
+    assert data["userId"] == payload["userId"]
+    assert isinstance(data["userId"], str)
