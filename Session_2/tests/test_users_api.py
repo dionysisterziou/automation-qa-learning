@@ -8,16 +8,16 @@ from validations.users_api import validate_user_by_id
         2
     ]
 )
-def test_get_user_by_id_ok(client_get, expected_id):
-    response = client_get(f"/users/{expected_id}") # timeout=5 μπαίνει default από http_client
+def test_get_user_by_id_ok(api_client, expected_id):
+    response = api_client.get(f"/users/{expected_id}") # timeout=5 μπαίνει default από http_client
     data = response.json()
 
     assert response.status_code == 200, f"Expected final 200, got {response.status_code}"
     validate_user_by_id(data, expected_id)
 
 
-def test_get_user_missing_resource(client_get):
-    response = client_get("/users/999999")
+def test_get_user_missing_resource(api_client):
+    response = api_client.get("/users/999999")
 
     assert response.status_code == 404
 

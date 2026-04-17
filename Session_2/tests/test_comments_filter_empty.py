@@ -1,10 +1,12 @@
-def test_get_comments_filter_empty(client_get):
+from http_client import parse_json
 
-    response = client_get("/comments?postId=9999")
+
+def test_get_comments_filter_empty(api_client):
+    response = api_client.get("/comments?postId=9999")
 
     assert response.status_code == 200
 
-    data = response.json()
+    data = parse_json(response)
 
     assert isinstance(data, list)
     assert data == []
