@@ -1,0 +1,185 @@
+# QA Automation Portfolio - Python, pytest, Playwright
+
+This repository contains QA automation projects built as I transition from Manual QA toward Automation QA / SDET-style work.
+
+It currently includes:
+
+- **Session_2**: API automation project using **Python + pytest + requests**
+- **Session_3_ui**: UI automation project using **Python + pytest + Playwright**
+
+---
+
+## Tech Stack
+
+- Python
+- pytest
+- requests
+- Playwright
+- Git / GitHub
+
+---
+
+## Repository Structure
+
+```text
+.
+├── Session_2/
+│   ├── config.py
+│   ├── http_client.py
+│   ├── tests/
+│   └── validations/
+├── Session_3_ui/
+│   ├── config.py
+│   ├── test_data.py
+│   └── tests/
+└── README.md
+```
+
+---
+
+## What This Repository Demonstrates
+
+This repository demonstrates practical QA automation fundamentals with a focus on clean test design and gradual framework thinking.
+
+It includes:
+
+- reusable API client setup
+- pytest fixtures for shared setup
+- reusable response contract / structure validations
+- positive, negative, and edge-case API tests
+- parametrized test coverage
+- UI automation practice with Playwright
+- clearer separation between test scenarios, validations, and shared infrastructure
+
+---
+
+## Session_2 — API Automation
+
+`Session_2` is the main API automation part of this repository.
+
+It is built around **Python + pytest + requests** and focuses on writing maintainable API tests with reusable infrastructure and validations.
+
+### What it demonstrates
+
+- reusable `HttpClient`
+- fixture-based setup with `api_client`
+- centralized JSON parsing through `parse_json()`
+- reusable response structure / contract validations
+- separation between:
+  - scenario assertions
+  - contract / structure validations
+  - shared infrastructure
+- positive, negative, and edge-case tests
+- parametrized tests across endpoints and scenarios
+
+### API test flow used in the suite
+
+1. send request
+2. assert status code
+3. parse JSON response
+4. validate response structure / contract
+5. assert scenario-specific expectations
+
+### Notes
+
+The API automation work in `Session_2` is based on **JSONPlaceholder**, which is a fake/demo API.
+
+Because of that, some negative scenarios reflect **observed fake API behavior**, not strict real-world backend validation behavior.
+
+For example, some invalid payloads may still return success responses and be echoed back instead of being rejected by the server.
+
+---
+
+## Session_3_ui — UI Automation
+
+`Session_3_ui` contains UI automation practice using **Python + pytest + Playwright**.
+
+### What it demonstrates
+
+- Playwright page interaction
+- locator usage
+- assertions with `expect()`
+- navigation and redirect validation
+- separation of tests by behavior
+- use of fixtures and test data / constants
+
+### Current UI examples
+
+- homepage heading visibility
+- navigation / redirect validation
+
+---
+
+## Setup
+
+Create and activate a virtual environment, then install the required packages.
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -U pip
+python -m pip install pytest requests playwright pytest-playwright
+python -m playwright install
+```
+
+---
+
+## How to Run
+
+### Run all API tests
+
+```bash
+python -m pytest -q Session_2
+```
+
+### Run all UI tests
+
+```bash
+python -m pytest -q Session_3_ui
+```
+
+### Run a single API test file
+
+```bash
+python -m pytest -q Session_2/tests/test_posts_api.py
+```
+
+### Run a single UI test file
+
+```bash
+python -m pytest -q Session_3_ui/tests/test_navigation.py
+```
+
+---
+
+## Why the Projects Are Structured This Way
+
+The goal of this repository is not only to write passing tests, but also to practice:
+
+- separation of concerns
+- reusable validations
+- maintainability
+- debugging-friendly test structure
+- negative testing
+- gradual refactoring into a cleaner automation framework foundation
+
+In the API project, tests keep the scenario and expected result, while validation helpers keep reusable contract / structure checks.
+
+This keeps the suite easier to scale, debug, and maintain.
+
+---
+
+## Current Focus
+
+I am using this repository to build toward:
+
+**Manual QA → Automation QA → SDET-style work**
+
+with emphasis on:
+
+- API automation
+- UI automation
+- reusable test design
+- maintainability
+- clearer debugging
+- cleaner project structure
