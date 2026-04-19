@@ -1,7 +1,7 @@
 from http_client import parse_json
 
 
-def test_get_comments_filter_empty(api_client):
+def test_get_comments_for_non_existing_post_id_returns_empty_list(api_client):
     response = api_client.get("/comments?postId=9999")
 
     assert response.status_code == 200

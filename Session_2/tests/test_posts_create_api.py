@@ -21,7 +21,9 @@ def test_create_post_ok(api_client):
     assert data["userId"] == payload["userId"]
 
 
-def test_create_post_missing_body_does_not_match_full_post_contract(api_client):
+def test_create_post_missing_body_jsonplaceholder_echoes_incomplete_payload(api_client):
+    # JSONPlaceholder fake API behavior:
+    # missing fields do not trigger server-side validation here; the API still returns 201.
     payload = {
         "title": "my test title",
         "userId": 1,
@@ -40,7 +42,9 @@ def test_create_post_missing_body_does_not_match_full_post_contract(api_client):
     assert "body" not in data
 
 
-def test_create_post_wrong_type_user_id_is_echoed_as_sent(api_client):
+def test_create_post_wrong_type_user_id_jsonplaceholder_echoes_payload_as_sent(api_client):
+    # JSONPlaceholder fake API behavior:
+    # wrong field types are echoed back as sent instead of being rejected.  
     payload = {
         "title": "my test title",
         "body": "my test body",
