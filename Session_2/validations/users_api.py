@@ -8,4 +8,4 @@ def validate_user_structure(data):
     assert isinstance(data["id"], int), "User id should be int"
     assert isinstance(data["name"], str), "User name should be str"
     assert isinstance(data["username"], str), "Username should be str"
-    assert isinstance(data["email"], str), "Email shoud be str"
+    assert isinstance(data["email"], str), "Email should be str"
