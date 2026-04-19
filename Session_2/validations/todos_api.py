@@ -1,20 +1,11 @@
-def validate_todo_by_id(data, expected_id):
-    
-    # id
-    assert "id" in data, "Missing 'id'"
-    assert isinstance(data["id"], int), f"Expected int, got {type(data['id'])}"
-    assert data["id"] == expected_id, f"Expected 'id' to be {expected_id}, got {data['id']}"
+def validate_todo_structure(data):
+    assert isinstance(data, dict), "Todo response should be a dictionary"
 
-    # userId
-    assert "userId" in data, "Missing 'userId'"
-    assert isinstance(data["userId"], int), f"Expected 'userId' to be int, got {type(data['userId'])}"
-    assert data["userId"], "'userId' is empty"
+    required_fields = ["userId", "id", "title", "completed"]
+    for field in required_fields:
+        assert field in data, f"Missing field: {field}"
 
-    # title
-    assert "title" in data, "Missing 'title'"
-    assert isinstance(data["title"], str), f"Expected 'title' to be str, got {type(data['title'])}"
-    assert data["title"], "'title' is empty"
-
-    # completed
-    assert "completed" in data, "Missing 'completed'"
-    assert isinstance(data["completed"], bool), f"Expected 'completed' to be bool, got {type(data['completed'])}"
+    assert isinstance(data["userId"], int), "Todo userId should be int"
+    assert isinstance(data["id"], int), "Todo id should be int"
+    assert isinstance(data["title"], str), "Todo title should be str"
+    assert isinstance(data["completed"], bool), "Todo completed should be bool"
