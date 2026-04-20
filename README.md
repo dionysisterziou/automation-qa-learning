@@ -5,7 +5,7 @@ This repository contains QA automation projects built as I transition from Manua
 It currently includes:
 
 - **Session_2**: API automation project using **Python + pytest + requests**
-- **Session_3_ui**: UI automation project using **Python + pytest + Playwright**
+- **Session_3_ui**: early UI automation practice using **Python + pytest + Playwright**
 
 ---
 
@@ -23,6 +23,9 @@ It currently includes:
 
 ```text
 .
+├── .gitignore
+├── README.md
+├── requirements.txt
 ├── Session_2/
 │   ├── config.py
 │   ├── http_client.py
@@ -32,7 +35,6 @@ It currently includes:
 │   ├── config.py
 │   ├── test_data.py
 │   └── tests/
-└── README.md
 ```
 
 ---
@@ -48,7 +50,7 @@ It includes:
 - reusable response contract / structure validations
 - positive, negative, and edge-case API tests
 - parametrized test coverage
-- UI automation practice with Playwright
+- early UI automation practice with Playwright
 - clearer separation between test scenarios, validations, and shared infrastructure
 
 ---
@@ -92,7 +94,9 @@ For example, some invalid payloads may still return success responses and be ech
 
 ## Session_3_ui — UI Automation
 
-`Session_3_ui` contains UI automation practice using **Python + pytest + Playwright**.
+`Session_3_ui` contains early UI automation practice using **Python + pytest + Playwright**.
+
+It is currently smaller in scope than the API project and represents an early Playwright practice stage.
 
 ### What it demonstrates
 
@@ -112,13 +116,12 @@ For example, some invalid payloads may still return success responses and be ech
 
 ## Setup
 
-Create and activate a virtual environment, then install the required packages.
+Create and activate a virtual environment, then install the project dependencies.
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
-python -m pip install -U pip
-python -m pip install pytest requests playwright pytest-playwright
+python -m pip install -r requirements.txt
 python -m playwright install
 ```
 
