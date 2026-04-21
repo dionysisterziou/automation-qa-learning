@@ -1,6 +1,18 @@
 from playwright.sync_api import Page, expect
-from test_data import  HOMEPAGE_HEADING
+from test_data import HOMEPAGE_HEADING, LEARN_MORE_TEXT
 
 
-def test_homepage_has_expected_title(homepage: Page):
+def test_homepage_heading_is_visible(homepage: Page):
     expect(homepage.get_by_role("heading", name=HOMEPAGE_HEADING)).to_be_visible()
+
+
+def test_learn_more_link_is_visible_and_points_to_iana(homepage: Page):
+    learn_more_link = homepage.get_by_role("link", name=LEARN_MORE_TEXT)
+
+    expect(learn_more_link).to_be_visible()
+    expect(learn_more_link).to_be_enabled()
+
+    href = learn_more_link.get_attribute("href")
+
+    assert href is not None, "Learn more link should have an href attribute"
+    assert "iana.org" in href, f"Expected Learn more link to point to IANA, got: {href}"
