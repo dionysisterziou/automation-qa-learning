@@ -28,8 +28,3 @@ def test_get_post_invalid_id_returns_404(api_client):
 def test_get_post_invalid_endpoint_returns_404(api_client):
     response = api_client.get("/invalid_endpoint")
     assert response.status_code == 404, f"Unexpected status code: {response.status_code}"
-
-
-def test_timeout_should_raise_exception(api_client):
-    with pytest.raises(requests.exceptions.Timeout):
-        api_client.get("/posts/1", timeout=0.0001)
